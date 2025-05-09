@@ -55,10 +55,11 @@ app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
 const startServer = async () => {
   try {
     await connectDB(); // Povezivanje s bazom
-    // Opcionalno: Sinkronizacija baze (korisno u razvoju, oprez u produkciji)
-    // Ako želite sinkronizirati, koristite importanu sequelize instancu:
-    await sequelize.sync(); // Removed { force: true } to prevent data loss
-    console.log('Database synchronized successfully');
+    
+    // Removed syncing with { force: true } since we'll use migrations instead
+    // Comment out or remove the sync call entirely when using migrations
+    // await sequelize.sync();
+    // console.log('Database synchronized successfully');
 
     // Create a default admin user only if it doesn't exist
     try {
